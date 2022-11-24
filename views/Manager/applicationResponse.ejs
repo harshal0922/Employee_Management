@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <link href="/stylesheets/bootstrap-select.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+</head>
+<body>
+    <nav class="navbar navbar-default no-margin">
+   
+        <%- include('../partials/manager/managerNavbar',{userName:userName}) %>
+    </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li  class="activeNow">
+                <a href="/manager/applied-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-dashboard fa-stack-1x "></i></span> View Leaves</a>
+            </li>
+            <li>
+                <a href="/manager/leave-applications"><span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-envelope-square fa-stack-1x "></i></span> Leave Applications</a></li>
+                    <li>
+                        <a href="/manager/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-envelope-square fa-stack-1x "></i></span>Apply for Leave</a>
+                    </li>
+                    <li >
+                        <a href="/manager/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+                    </li>
+           <li>
+                <a href="/manager/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-list-ol fa-stack-1x"></i></span>View Holidays</a>
+            </li>
+            <li>
+                <a href="/manager/view-profile"><span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+            </li>
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="menu1" style="height:717px">
+                    <h1>Application's Details</h1>
+                    <br>
+                    <form class="form-group-sm" action="/manager/respond-application" method="post">
+                        <h4>Title : <label id="title"><%=leave.title%></label></h4>
+                        <h4>Type : <label id="type"><%=leave.type%></label></h4>
+                        <h4>Applicant's Name : <label id="name"><%=employee.name%></label></h4>
+                        <h4>Applicant's Email : <label id="email"><%=employee.email%></label></h4>
+                        <h4>Period(Days): <label id="period"><%=leave.period%></label></h4>
+                        <h4>Start Date : <label id="start"><%=moment(leave.startDate).format('MMMM Do YYYY')%></label></h4>
+                        <h4>End Date : <label id="end"><%=moment(leave.endDate).format('MMMM Do YYYY')%></label></h4>
+                        <h4>Applied Date : <label id="end"><%=moment(leave.appliedDate).format('MMMM Do YYYY')%></label></h4>
+                        <h4 style="font-size: x-large">Reason:</h4>
+                       <div style="height: 100%; overflow: auto;">
+                        <p style="font-family: 'Arial Nova'; font-size: 18px" id="reason" style="word-wrap:break-word"><%=leave.reason%></p>
+                       </div>
+                        <div class="form-group">
+                            <label for="status"><h4 style="font-size: x-large">Status:</h4></label>
+                            <select class="form-control" id="status" name="status" placeholder="submitted">
+                                <option value="<%=leave.managerResponse%>"><%=leave.managerResponse%></option>
+                                <% if(leave.managerResponse!="Pending"){%>
+                                <option value="Pending">Pending</option>
+                                <%}%>
+                                <% if(leave.managerResponse!="Approved"){%>
+                                <option value="Approved">Approved</option>
+                                <%}%>
+                                <% if(leave.managerResponse!="Disapproved"){%>
+                                <option value="Disapproved">Disapproved</option>
+                                <%}%>
+
+                            </select>
+                        </div>
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                        <input type="hidden" id="leave_id" name="leave_id" value="<%=leave._id%>">
+                        <button type="button" onclick="history.go(-1);" class="btn btn-default">Go Back</button>
+                        <button type="submit"  class="btn btn-default">Submit Response</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+    $(document).ready(function () {
+        var box1height =  $('#menu1').height();
+        // Set box2 height equal to box1
+        $('#sidebar-wrapper').height(box1height*1.1);
+        for (i = new Date().getFullYear(); i > 1950; i--)
+        {
+            $('#year').append($('<option />').val(i).html(i));
+        }
+
+    });
+</script>
+</body>
+</div>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <link href="/stylesheets/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/09afaa9242.js" crossorigin="anonymous"></script>
+
+ <link rel='stylesheet' href='/stylesheets/style.css'/>
+<link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+
+</head>
+<body>
+<nav class="navbar navbar-default no-margin">
+    <%- include('../partials/admin/adminNavbar') %>
+</nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+            <li>
+                <a href="#" id="menu3"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-users fa-stack-1x "></i></span> Employees</a>
+                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                    <li><a href="/admin/view-all-employees"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-eye fa-stack-1x "></i></span>View Employees</a></li>
+                    <li><a href="/admin/add-employee"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-plus fa-stack-1x "></i></span>Add Employees</a></li>
+                </ul>
+            </li>
+            
+            <li >
+                <a href="/admin/leave-applications"> <span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-list-ol fa-stack-1x "></i></span>All Employee Leaves</a>
+            </li>
+            <li >
+                <a href="/admin/applied-leaves"> <span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-check fa-stack-1x "></i></span>Applied Leaves</a>
+            </li>
+            <li>
+                    <a href="/admin/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                                    class="fa fa-envelope-square fa-stack-1x "></i></span>Apply for Leave</a>
+                </li>
+                <li>
+                    <a href="/admin/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                    class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+                </li>
+           
+            <li>
+            <a href="/admin/add-holiday"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-plus fa-stack-1x "></i></span>Add Holiday</a>
+                </li>
+                <li>
+                    <a href="/admin/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                        class="fa fa-umbrella-beach fa-stack-1x"></i></span>View Holidays</a>
+                    </li>
+                    <li>
+                        <a href="/admin/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+                    </li>
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="menu1" style="height:717px;">
+                        <h1>Project Information</h1>
+                        <br>
+                        <form class="form-group-sm">
+                            <h4>Employee: <label id="title"><%= employee.name %></label></h4>
+                            <h4>Title : <label id="title"><%= project.title %></label></h4>
+                            <h4>Type : <label id="type"><%= project.type %></label></h4>
+                            <h4>Status : <label id="status"><%= project.status %></label></h4>
+                            <h4>Start Date : <label
+                                        id="start"><%= moment(project.startDate).format('MMMM Do YYYY'); %></label></h4>
+                            <h4>End Date : <label
+                                        id="end"><%= moment(project.endDate).format('MMMM Do YYYY'); %></label></h4><br>
+                            <h4 style="font-size: x-large">Description:</h4>
+                            <div style="height: 250px; overflow: auto;">
+                                <p style="font-family: 'Arial Nova'; font-size: medium" id="description"
+                                   style="word-wrap: break-word;"><%= project.description; %></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+    $(document).ready(function () {
+        var box1height = $('#menu1').height();
+        // Set box2 height equal to box1
+        $('#sidebar-wrapper').height(box1height * 1.2);
+        for (i = new Date().getFullYear(); i > 1950; i--) {
+            $('#year').append($('<option />').val(i).html(i));
+        }
+
+    });
+</script>
+</body>
+
+ 
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+<style>
+.align{
+text-align: center;
+}
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default no-margin">
+    <%- include('../partials/employee/employeeNavbar') %>
+</nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+            <li >
+                <a href="/employee/applied-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-dashboard fa-stack-1x "></i></span> View Leaves</a>
+            </li>
+            <li>
+                <a href="/employee/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-envelope-square fa-stack-1x "></i></span>Apply for Leave</a>
+            </li>
+            <li   class="activeNow">
+                <a href="/employee/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+            </li>
+          
+            <li>
+                <a href="/employee/public-holiday"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-list-ol fa-stack-1x"></i></span>View Holidays</a>
+            </li>
+            <li>
+                <a href="/employee/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+            </li>
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Your Balance Leaves</h1><br>
+                    <div style="height:600px; overflow: auto">
+                        <table id="example" class="display" cellspacing="0" style="height: 10%; overflow: auto;">
+                            <thead>
+                            <tr >
+                                <th class="align">sickLeave</th>
+                                <th class="align">casualLeave</th>
+                                <th class="align">personalLeave</th>
+                                <th class="align">maternityLeave</th>
+                                <th class="align">paternityLeave</th>
+                                <th class="align">marriageLeave</th>
+                                <th class="align">adoptionLeave</th>
+                            </tr>
+                            </thead>
+                            <!-- <tfoot>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Applied Date</th>
+                                <th>Period of Leave</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot> -->
+                            <tbody>
+                            <tr class="align">
+                                <td><%= employee.balanceLeave.SickLeave %>/15 Days</td>
+                                <td><%= employee.balanceLeave.CasualLeave %> /15 Days</td>
+                                <td><%= employee.balanceLeave.PersonalLeave %>/15 Days </td>
+                                <td><%= employee.balanceLeave.MaternityLeave %>/180 Days</td>
+                                <td><%= employee.balanceLeave.PaternityLeave %>/30 Days</td>
+                                <td><%= employee.balanceLeave.MarriageLeave %>/15 Days</td>
+                                <td><%= employee.balanceLeave.AdoptionLeave %>/30 Days</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+</div>
+<!-- /#wrapper -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="/javascripts/confirmation.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "order": []
+        });
+        // Setup - add a text input to each footer cell
+        // $('#example tfoot th').each(function () {
+        //     var title = $(this).text();
+        //     if (title != " ") {
+        //         $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        //     }
+        // });
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                            .search(this.value)
+                            .draw();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+

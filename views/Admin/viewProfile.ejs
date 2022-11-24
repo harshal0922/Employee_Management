@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/09afaa9242.js" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+    <link rel='stylesheet' href='/stylesheets/profile.css'/>
+
+<style>
+    h4{
+        font-size: 22px;
+    }
+    p{
+        font-size: 22px !important;
+    }
+    #empId{
+        text-align: left;
+        font-family: 'Roboto', sans-serif;
+         font-size: 18px !important;
+    }
+    .proj{
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 10px !important;
+    color: #5c5353 !important;
+    text-decoration: none;
+    width: 120px;
+}
+.proj a {
+
+    color: #5c5353;
+    text-decoration: none;
+}
+.pass a{
+    margin-right: 0px;
+    text-decoration: none;
+    padding: 5px;
+    color: #5c5353;
+}
+.pass{
+    background: transparent;
+    border-radius: 15px;
+    height: 40px;
+    
+}
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-default no-margin">
+   
+        <%- include('../partials/admin/adminNavbar',{userName:userName}) %>
+    </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+            <li>
+                <a href="#" id="menu3"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-users fa-stack-1x "></i></span> Employees</a>
+                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                    <li><a href="/admin/view-all-employees"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-eye fa-stack-1x "></i></span>View Employees</a></li>
+                    <li><a href="/admin/add-employee"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-plus fa-stack-1x "></i></span>Add Employees</a></li>
+                </ul>
+            </li>
+            
+            <li >
+                <a href="/admin/leave-applications"> <span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-list-ol fa-stack-1x "></i></span>All Employee Leaves</a>
+            </li>
+            <li >
+                <a href="/admin/applied-leaves"> <span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-check fa-stack-1x "></i></span>Applied Leaves</a>
+            </li>
+            <li>
+                    <a href="/admin/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-envelope-square fa-stack-1x "></i></span>Apply for Leave</a>
+                </li>
+                <li>
+                    <a href="/admin/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+                </li>
+           
+            <li>
+                    <a href="/admin/add-holiday"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-plus fa-stack-1x "></i></span>Add Holiday</a>
+                </li>
+                <li>
+                    <a href="/admin/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-umbrella-beach fa-stack-1x"></i></span>View Holidays</a>
+                </li>
+                <li class="activeNow">
+                    <a href="/admin/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                    class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+                </li>
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <div class="wrapper">
+        <div class="left">
+            <h2 style="text-align: left;"><%= employee.name %></h2>
+            <p id="empId">Employee ID:-<%= employee.empId%>(HR)</p>
+             
+        </div>
+        <div class="right">
+            <div class="info">
+                <h3>Personal Information  </h3>
+                <div class="info_data">
+                     <div class="data">
+                        <h4>Email</h4>
+                        <p><%= employee.email %></p>
+                     </div>
+                     <div class="data">
+                       <h4 style="margin-left: 40px;">Phone</h4>
+                        <p style="margin-left: 40px;"><%= employee.contactNumber%></p>
+                  </div>
+                     <div class="data">
+                       <h4>Date Of Birth</h4>
+                        <p> <%=moment(employee.dateOfBirth).format('MMMM Do YYYY')%></p>
+                  </div>
+                </div>
+            </div>
+                <hr>
+                <div class="project">
+                    <h3></h3>
+                      <div class="projects_data">
+                           <div class="data">
+                              <button class="  pass"><a  href="/admin/change-password">Change Password</a></button>
+                           </div>
+                        </div>
+                      </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+
+
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+
+    $(document).ready(function () {
+        for (i = new Date().getFullYear(); i > 1900; i--) {
+            $('#year').append($('<option />').val(i).html(i));
+        }
+    });
+</script>
+</body>
+
+</html>

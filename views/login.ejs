@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIS | Login</title>
+  <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="content">
+      <div class="imgLogo name-content" >
+        <img src="/images/axis_logo.svg" alt="axislog" height="50px">
+      </div>
+      <div class="flex-div">
+          <form action="/login" method="post" autocomplete="off">
+            <input type="text" placeholder="Email" name="email" class="input" required />
+            <input type="password" placeholder="Password"  name="password" class="input" required>
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <button type="submit" id="login" onclick="validate()" class="btn btn-primary btn-block btn-large login">Login</button>
+            <%if(hasErrors){%>
+            <% messages.forEach(function(item){%>
+            <label style="color: red;" id="message"><%=item%></label>
+            <%})%>
+
+            <%}%>
+
+          </form>
+      </div>
+    </div>
+    <script src="/javascripts/index.js"></script>
+    <script>
+    function validate() {
+        //document.getElementById("message").innerHTML = "Incorrect Username or Password";
+    }
+</script>
+  </body>
+</html>

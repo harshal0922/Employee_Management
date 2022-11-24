@@ -1,0 +1,14 @@
+body {
+    background-image: url('../images/adminbg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  #sidebar-wrapper{
+      background-image: url('../images/bg10.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      border-right: 3px solid black;
+      overflow: hidden;
+  }

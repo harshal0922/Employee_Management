@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-select.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/09afaa9242.js" crossorigin="anonymous"></script>
+
+ <link rel='stylesheet' href='/stylesheets/style.css'/>
+<link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+
+</head>
+<body>
+    <nav class="navbar navbar-default no-margin">
+        <%- include('../partials/admin/adminNavbar') %>
+    </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li class="activeNow">
+                <a href="/senior/leave-applications"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-envelope-square fa-stack-1x "></i></span> All Employee Leaves</a>
+            </li>
+             <li>
+                <a href="/senior/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-list-ol fa-stack-1x"></i></span>View Holidays</a>
+            </li>
+            <li>
+                <a href="/senior/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+            </li> 
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div> 
+                    <form action="/senior/add-profile/?_csrf=<%=csrfToken%>" method="POST" enctype="multipart/form-data"> 
+                        <div> 
+                            <label for="image">Upload Image</label> 
+                            <input type="file" id="image" 
+                                   name="image" value="" required> 
+                            <input type="text" id="name" 
+                                   name="name" value="Enter name" required> 
+                        </div> 
+                        <div> 
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit">Submit</button> 
+                        </div> 
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script src="/javascripts/bootstrap-select.min.js"></script>
+<script language="Javascript" type="text/javascript">
+
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else {
+                return true;
+            }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123 || charCode === 32))
+                return true;
+            else
+                return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+</script>
+<script>
+     $(document).ready(function () {
+        
+
+        $('#form1').on('submit',function(){
+            var date=new Date($('#date').val());
+            var dateNow=new Date();  
+            if(date<=dateNow){
+                $('#error').text("Holiday should not be in past")
+                return false
+            }    
+            return true;
+        })
+
+    });
+</script>
+</body>
+</html>

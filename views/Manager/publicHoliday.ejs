@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-select.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+<style>
+     #example_wrapper{
+  position: relative;
+clear: both;
+width: 60%;
+margin-left: 18%;
+border: 2px solid black;
+margin-top: 15px;
+zoom: 1;
+}
+</style>
+    <!-- <style>
+        
+        #example_length{
+            display: none;
+        }
+        #example_filter{
+            display: none;
+        }
+        #example_paginate{
+            display: none;
+        }
+        .activeNow{
+    background-color: #fc5c99 !important;
+}
+        </style> -->
+</head>
+<body>
+<nav class="navbar navbar-default no-margin">
+    <%- include('../partials/manager/managerNavbar') %>
+</nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li >
+                <a href="/manager/applied-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-dashboard fa-stack-1x "></i></span> View Leaves</a>
+            </li>
+            <li >
+                <a href="/manager/leave-applications"> <span class="fa-stack fa-lg pull-left">
+                    <i class="fa fa-list-ol fa-stack-1x "></i></span>Leave Applications</a>
+            </li>
+            <li>
+                <a href="/manager/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-envelope-square fa-stack-1x "></i></span>Apply for Leave</a>
+            </li>
+            <li >
+                <a href="/manager/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+            </li>
+                <li  class="activeNow">
+                    <a href="/manager/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                        class="fa fa-list-ol fa-stack-1x"></i></span>View Holidays</a>
+                    </li>
+                    <li>
+                        <a href="/manager/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                                        class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+                    </li>
+                    
+                </ul>
+            </div><!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Public Holiday</h1>
+                    <div style="height:600px; overflow: auto">
+                        <table id="example" class="display" cellspacing="0" style="height: 10%; overflow: auto;">
+                            <thead>
+                            <tr>
+                                <th style="border-bottom: 4px solid black;">Date</th>
+                                <th style="border-left: 2px solid black;border-bottom: 4px solid black;">Description</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% holiday.forEach(function(item){ %>
+
+                            <tr>
+                                <td><%= item.date %></td>
+                                <td style="padding-left: 70px;border-left: 2px solid black;"><%= item.desc %></td>
+    
+                            </tr>
+                            <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+    var managerId;
+    $(document).ready(function () {
+        $("#example").on('click', '.deletemp', function () {
+            $('#name').text($(this).parents().closest('tr').find('td:eq(0)').text());
+            $('#email').text($(this).parents().closest('tr').find('td:eq(1)').text());
+        });
+
+        $(document).on("click", ".delete-button", function () {
+            managerId = (this.id);
+            document.getElementById("modal-delete-form").action = "/manager/delete-manager/" + managerId;
+
+        });
+
+        $('#example').dataTable({
+            /* No ordering applied by DataTables during initialisation */
+            "order": []
+        });
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+
+        $('#menu3').click();
+        // Setup - add a text input to each footer cell
+        $('#example tfoot th').each(function () {
+            var title = $(this).text();
+            if (title != " ") {
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+            }
+        });
+        for (i = new Date().getFullYear(); i > 1950; i--) {
+            $('#year').append($('<option />').val(i).html(i));
+        }
+
+        // DataTable
+        var table = $('#example').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                            .search(this.value)
+                            .draw();
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+
+
+</html>

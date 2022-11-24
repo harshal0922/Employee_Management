@@ -1,0 +1,302 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  background: #f2f4f7;
+  height: 125vh;
+  background-image: url('../images/bg2.jpg');
+  background-size: cover;
+  font-family: sans-serif;
+  margin-top: 80px;
+  padding: 30px;
+}
+.navbar_logo{
+  width: 130px;
+  margin-left: 18px;
+}
+header img {
+  height: 80px;
+  margin-left: 40px;
+}
+
+main {
+  color: white;
+}
+
+header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
+}
+
+header * {
+  display: inline;
+}
+
+header li {
+  margin: 20px;
+}
+
+header li a {
+  color: black;
+  text-decoration: none;
+}
+/* .bg{
+  width: 100%;
+  align-items : center;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: green;
+  overflow: hidden;
+} */
+/* .background{
+  background:url('/img/images.jfif') no-repeat center center;
+    background-size: cover;
+
+} */
+
+.content {
+  position: absolute;
+  top: 58%;
+  left: 82%;
+  transform: translate(-50%, -50%);
+  background: #efd3e4;
+  padding: 2rem;
+  width: 380px;
+  height: 360px;
+  border-radius: 1.3rem;
+  box-shadow: 23px 23px 58px -2px rgba(255, 251, 251, 0.75);
+}
+
+.flex-div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.name-content {
+  margin-right: 7rem;
+  margin-left: 43px;
+}
+
+.name-content .logo {
+  font-size: 40px;
+  color: #AE275F;
+  margin-left: 40px;
+}
+
+.name-content p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  margin-left: 30px;
+}
+
+form {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  /* background: #fff;
+  padding: 2rem;
+  width: 500px;
+  height: 370px;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%); */
+}
+
+form input {
+  outline: auto;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 18px;
+  border-radius: 12px;
+  background-color: #ffe8f6;
+
+}
+
+form input:focus {
+  border: 1.8px solid #1877f2;
+}
+
+form .login {
+  outline: none;
+  border: none;
+  background: #AE275F;
+  padding: 0.8rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+form .login:hover {
+  background: #f9599c;
+  cursor: pointer;
+}
+
+form a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 0.8rem;
+  color: #1877f2;
+}
+
+form hr {
+  background: #000000;
+  margin: 11px;
+}
+
+form .create-account {
+  outline: none;
+  border: none;
+  background: #EB1165;
+  padding: 0.8rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.1rem;
+  color: #fff;
+  width: 85%;
+  margin: 0 auto;
+}
+
+form .create-account:hover {
+  background: #03ad06;
+  cursor: pointer;
+}
+
+/* //.........Media Query.........// */
+
+@media (max-width: 500px) {
+  html {
+    font-size: 60%;
+  }
+
+  .name-content {
+    margin: 0;
+    text-align: center;
+  }
+
+  form {
+    width: 300px;
+    height: fit-content;
+  }
+
+  form input {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  form .login {
+    font-size: 1.5rem;
+  }
+
+  form a {
+    font-size: 1.5rem;
+  }
+
+  form .create-account {
+    font-size: 1.5rem;
+  }
+
+  .flex-div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+  html {
+    font-size: 60%;
+  }
+
+  .name-content {
+    margin: 0;
+    text-align: center;
+  }
+
+  form {
+    width: 300px;
+    height: fit-content;
+  }
+
+  form input {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  form .login {
+    font-size: 1.5rem;
+  }
+
+  form a {
+    font-size: 1.5rem;
+  }
+
+  form .create-account {
+    font-size: 1.5rem;
+  }
+
+  .flex-div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  html {
+    font-size: 60%;
+  }
+
+  .name-content {
+    margin: 0;
+    text-align: center;
+  }
+
+  form {
+    width: 300px;
+    height: fit-content;
+  }
+
+  form input {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  form .login {
+    font-size: 1.5rem;
+  }
+
+  form a {
+    font-size: 1.5rem;
+  }
+
+  form .create-account {
+    font-size: 1.5rem;
+  }
+
+  .flex-div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (orientation: landscape) and (max-height: 500px) {
+    .header {
+      height: 90vmax;
+    }
+  }  
+}

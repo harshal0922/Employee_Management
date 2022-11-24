@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AXIS | <%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"/>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/simple-sidebar.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-select.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/bgStyle.css'/>
+<style>
+
+    #odd{
+        background: transparent;
+        
+    }
+    #odd td{
+        border-bottom: 2px solid black;
+        border-right: 2px solid rgb(197, 188, 188);
+    }
+    #period{
+        padding-left: 55px;
+    }
+</style>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-default no-margin">
+   
+        <%- include('../partials/senior/seniorNavbar',{userName:userName}) %>
+    </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li >
+                <a href="/senior/applied-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-dashboard fa-stack-1x "></i></span> View Leaves</a>
+            </li>
+            <li class="activeNow">
+                <a href="/senior/leave-applications"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-envelope-square fa-stack-1x "></i></span> All Employee Leaves</a>
+                </li>
+                   <li>
+                     <a href="/senior/apply-for-leave"><span class="fa-stack fa-lg pull-left"><i
+                         class="fa fa-reply fa-stack-1x "></i></span>Apply for Leave</a>
+                        </li>
+                    <li>
+                    <a href="/senior/balance-leaves"><span class="fa-stack fa-lg pull-left"><i
+                                    class="fa fa-check-circle fa-stack-1x "></i></span>Balance Leaves</a>
+                                </li>
+                <li>
+                <a href="/senior/view-holiday"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-list-ol fa-stack-1x"></i></span>View Holidays</a>
+            </li>
+            <li>
+                <a href="/senior/view-profile"><span class="fa-stack fa-lg pull-left"><i
+                                class="fa fa-user fa-stack-1x "></i></span>View Profile</a>
+            </li> 
+        </ul>
+    </div><!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid xyz">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>All Employee Leaves</h1>
+                    <div style="height:717px; overflow: auto">
+                        <% if(hasLeave === 1){ %>
+                        <table id="example" class="display" cellspacing="0" style="height: 10%; overflow: auto;">
+                            <thead>
+                                <tr>
+                                    <th>Applicant's Name</th>
+                                    <th style="padding-left: 35px;">Type</th>
+                                    <th>Applied Date</th>
+                                    <th style="padding-left: 25px;">From Date</th>
+                                    <th style="padding-left: 40px;">To Date</th>
+                                    <th>Period(Days)</th>
+                                    <th style="padding-left: 25px;" >Status</th>
+    
+                                    <th>Respond Applications</th>
+    
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0;i < leaves.length;i++){ %>
+                                <tr id="odd">
+                                    <td><%= leaves[i].title %></td>
+                                    <td ><%= leaves[i].type %></td>
+                                    <td><%= moment(leaves[i].appliedDate).format('MMMM Do YYYY') %></td>
+                                    <td><%= moment(leaves[i].startDate).format('MMMM Do YYYY') %></td>
+                                    <td><%= moment(leaves[i].endDate).format('MMMM Do YYYY') %></td>
+                                    <td id="period"> <%= leaves[i].period %></td>
+                                    <td><%= leaves[i].managerResponse %></td>
+                                    <td>
+                                    <%if(leaves[i].managerResponse=="Approved"||leaves[i].managerResponse=="Disapproved"){%>
+                                        <label for="responded">Already Responded</label>
+                                    <%}else{%>
+                                        <form method="get"
+                                              action="/senior/respond-application/<%= leaves[i]._id %>/<%= leaves[i].applicantID
+                                              %>">
+                                            <button type="submit" style="margin-left: 60px;"><i class="fa fa-plus fa-lg" title="Responsd"
+                                                                     aria-hidden="true"></i></button>
+                                        </form>
+                                    <%}%>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                            <% }else{ %>
+                            <p>All Employee Leaves not found</p>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.js" charset="UTF-8"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" charset="UTF-8"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/javascripts/sidebar_menu.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+
+        $('#example').dataTable({
+            /* No ordering applied by DataTables during initialisation */
+            "order": []
+        });
+        for (i = new Date().getFullYear(); i > 1950; i--) {
+            $('#year').append($('<option />').val(i).html(i));
+        }
+
+
+        // Setup - add a text input to each footer cell
+        $('#example tfoot th').each(function () {
+            var title = $(this).text();
+            if (title != " ") {
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+            }
+        });
+
+        // DataTable
+        var table = $('#example').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                            .search(this.value)
+                            .draw();
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

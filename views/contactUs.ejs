@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIS | ContactUs</title>
+    <link href="/stylesheets/contactUs.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+    <div class="contain">
+        <div class="wrapper">
+      
+          <div class="form">
+            <h4>GET IN TOUCH</h4>
+            <h2 class="form-headline">Send us a message</h2>
+            <form id="submit-form" action="">
+              <p>
+                <input id="name" class="form-input" type="text" placeholder="Your Name*">
+                <small class="name-error"></small>
+              </p>
+              <p>
+                <input id="email" class="form-input" type="email" placeholder="Your Email*">
+                <small class="name-error"></small>
+              </p>
+              <p class="full-width">
+                <input id="company-name" class="form-input" type="text" placeholder="Contact Number*" required>
+                <small></small>
+              </p>
+              <p class="full-width">
+                <textarea  minlength="20" id="message" cols="30" rows="7" placeholder="Your Message*" required></textarea>
+                <small></small>
+              </p>
+              <p class="full-width">
+                <input type="checkbox" id="checkbox" name="checkbox" checked> Yes, I would like to receive communications by call / email about Company's services.
+              </p>
+              <p class="full-width">
+                <input type="submit" class="submit-btn" value="Submit" onclick="checkValidations()">
+                <button class="reset-btn" onclick="reset()">Reset</button>
+              </p>
+            </form>
+          </div>
+      
+          <div class="contacts contact-wrapper">
+      
+            <ul>
+              <li>If you have any questions or concerns about our services that require urgent intervention,
+                 you can get in touch with us in the following ways.
+                how we can help you?</li>
+              <span class="hightlight-contact-info">
+                <li class="email-info"><i class="fa fa-envelope" aria-hidden="true"></i> support@axis.com</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> <span class="highlight-text">+91 11 1111 2900</span></li>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
